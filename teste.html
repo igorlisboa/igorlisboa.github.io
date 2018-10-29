@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>teste</title>
+</head>
+<body>
+
+	<input type="time" name="entrada" id="entrada" maxlength="5" oninput="calcula()" autocomplete="on">
+	<button onclick="calcula()" >OK</button>
+
+<br/>
+<br/>
+<br/>
+<hr/>
+
+<span>horas trabalhadas:&nbsp;<span id="qtd_h_t"></span></span>
+<span>faltam:&nbsp;<span id="resta"></span></span>
+
+
+	<table>
+		<thead>
+			<tr>
+				<th>Entrada</th>
+				<th>Saída</th>
+			</tr>
+		</thead>
+		<tbody id="table-body">
+			
+		</tbody>
+	</table>
+
+
+
+
+	<script type="text/javascript">
+		var entradas = [];
+		var saidas = [];
+		var qtd_h_t = 0;
+		var resta = 0;
+
+		function calcula($event){
+			var hora = event.target.value.slice(0,2);
+			var min = event.target.value.slice(3);
+			var px = (hora * 60) + Number(min);
+			var now = ((new Date().getHours()) * 60) + (new Date().getMinutes());
+
+			pontos.unshift(px);
+
+			if(pontos.length % 2 > 0){
+				var temp = [...pontos];
+				temp.unshift(now);
+				var tempEntradas = temp.filter((value,index)=> index % 2 > 0).reduce((a,b)=>a+b);
+				var tempsaidas = temp.filter((value,index)=> index % 2 == 0).reduce((a,b)=>a+b);
+		
+				qtd_h_t = tempsaidas - tempEntradas;
+				resta = expediente - qtd_h_t;
+
+				var tableRow = document.createElement("TR");
+			    var tableData = document.createElement("TD");
+			    var horaFinal = document.createTextNode();
+			    node2.appendChild(textnode);
+			    node.appendChild(node2);
+			    document.getElementById("myList").appendChild(node);
+
+
+			}else{
+				var tempEntradas = pontos.filter((value,index)=> index % 2 > 0).reduce((a,b)=>a+b);
+				var tempsaidas = pontos.filter((value,index)=> index % 2 == 0).reduce((a,b)=>a+b);
+		
+				qtd_h_t = tempsaidas - tempEntradas;
+				resta = expediente - qtd_h_t;
+
+
+ var node = document.createElement("TD");
+    var textnode = document.createTextNode("13:50");
+    node.appendChild(textnode);
+    //node.appendChild(node2);
+    document.getElementById("myList").lastElementChild.appendChild(node);
+
+			}
+
+
+			
+		}
+
+	</script>
+
+</body>
+</html>
